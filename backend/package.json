@@ -7,13 +7,20 @@
     "dev": "nodemon src/server.js",
     "start": "node src/server.js"
   },
-  "keywords": ["express", "api", "backend", "qualtrics", "openai"],
+  "keywords": [
+    "express",
+    "api",
+    "backend",
+    "qualtrics",
+    "openai"
+  ],
   "author": "Michael Jeffery <mgjeffery22@tamu.edu> (https://github.com/MichaelJeffery2026)",
   "license": "UNLICENSED",
   "dependencies": {
     "adm-zip": "^0.5.16",
     "dotenv": "^17.2.2",
     "express": "^5.1.0",
+    "he": "^1.2.0",
     "mustache": "^4.2.0",
     "winston": "^3.17.0"
   },

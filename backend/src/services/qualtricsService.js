@@ -36,7 +36,7 @@ export async function qualtricsFetch(path, init = {}) {
         }
 
         const err = new Error(message);
-        err.status = response.status; // preserve Qualtrics HTTP status
+        err.status = response.status;
         logger.error(`qualtricsFetch failed: ${err.message}`, { status: response.status });
         throw err;
     }

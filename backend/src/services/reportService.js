@@ -1,6 +1,8 @@
 import { fetchQuestions, startResponseExport, pollResponseExport, completeResponseExport } from "./qualtricsService.js";
 import logger from "../utils/logger.js";
 
+import { compileReport, renderTemplate } from "./pdfService.js";
+
 export async function getRawReport(surveyId, sectionId) {
     try {
         // 1. Fetch question data from qualtrics
@@ -14,7 +16,11 @@ export async function getRawReport(surveyId, sectionId) {
         // 3. Combine question and response data
         const rawData = await formatRawReportData(shapedQuestions, shapedResponses, surveyId, sectionId);
 
-        return rawData;
+        for (const response of rawData.data) {
+            await renderTemplate(response);
+        }
+        const pdfPath = await compileReport();
+        return pdfPath;
     } catch (err) {
         logger.error(`reportService.getRawReport failed: ${err.message}`);
         throw err;
