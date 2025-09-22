@@ -1,0 +1,25 @@
+\subsection{ {{{name}}} }
+\tagstructbegin{tag=Table}
+\rowcolors{2}{gray200}{gray100}
+\renewcommand{\tabularxcolumn}[1]{>{\centering\arraybackslash}m{#1}}
+\newcolumntype{A}{>{\centering\arraybackslash}m{0.33\linewidth}}
+\newcolumntype{B}{>{\centering\arraybackslash}m{0.09\linewidth}}
+\newcolumntype{C}{>{\centering\arraybackslash}m{0.08\linewidth}}
+\newcolumntype{D}{>{\centering\arraybackslash}m{0.1\linewidth}}
+\footnotesize
+\begin{xltabular}{\linewidth}{AXXXBCDX}
+	\rowcolor{maroon}
+		\bfseries\color{white} Field &
+		\bfseries\color{white} Min &
+		\bfseries\color{white} Max &
+		\bfseries\color{white} Mean &
+		\bfseries\color{white} Standard Deviation &
+		\bfseries\color{white} Variance &
+		\bfseries\color{white} Responses &
+		\bfseries\color{white} Sum \\
+	{{#responses}}
+	\raggedright{ {{{option}}} } & {{min}} & {{max}} & {{mean}} & {{stdev}} & {{var}} & {{count}} & {{sum}} \\
+	{{/responses}}
+\end{xltabular}
+\normalsize
+\tagstructend
