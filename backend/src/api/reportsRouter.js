@@ -1,5 +1,6 @@
 import express, { raw } from "express";
 import { getRawReport } from "../services/reportService.js"
+import { getFullReport } from "../services/reportService.js";
 import logger from "../utils/logger.js";
 import AppError from "../errors/appError.js";
 

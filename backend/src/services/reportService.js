@@ -27,6 +27,10 @@ export async function getRawReport(surveyId, sectionId) {
     }
 }
 
+export async function getFullReport(surveyId, sectionId, body) {
+    return 0;
+}
+
 async function shapeQuestions(questionData, surveyId, sectionId) {
     try {
         return (questionData).map(question => {
