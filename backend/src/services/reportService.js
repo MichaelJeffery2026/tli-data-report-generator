@@ -1,7 +1,8 @@
 import { fetchQuestions, startResponseExport, pollResponseExport, completeResponseExport } from "./qualtricsService.js";
+import { compileReport, renderTemplate } from "./pdfService.js";
+import { callTAMUAI } from "./tamuAIservice.js";
 import logger from "../utils/logger.js";
 
-import { compileReport, renderTemplate } from "./pdfService.js";
 
 export async function getRawReport(surveyId, sectionId) {
     try {
@@ -27,8 +28,9 @@ export async function getRawReport(surveyId, sectionId) {
     }
 }
 
-export async function getFullReport(surveyId, sectionId, body) {
-    return 0;
+export async function getFullReport(body) {
+    const response = await callTAMUAI([{ role: "user", content: "What is 2+2?" }]);
+    return response;
 }
 
 async function shapeQuestions(questionData, surveyId, sectionId) {
