@@ -20,4 +20,11 @@ router.get("/raw/:surveyId/:sectionId", asyncHandler(async (req, res) => {
     res.status(200).download(rawReport, `raw-report-${surveyId}-${sectionId}.pdf`);
 }));
 
+router.post("/full/:surveyId/:sectionId", asyncHandler(async (req, res) => {
+    const { surveyId, sectionId } = req.params;
+    const fullReport = await getFullReport(surveyId, sectionId, req.body);
+
+    res.status(200).json(fullReport);
+}));
+
 export default router;
