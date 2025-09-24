@@ -1,0 +1,9 @@
+The text of the question is: "{{{text}}}"
+
+{{{count}}} students responded.
+
+{{#responses}}
+- {{{count}}} students chose "{{{option}}}"
+{{/responses}}
+
+Write one concise paragraph summarizing these results and, where appropriate, drawing conclusions about the students' experience. Do not simply restate the numbers; highlight any patterns, trends, or implications for course design and student engagement.

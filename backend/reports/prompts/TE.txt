@@ -1,0 +1,11 @@
+The text of the question is: "{{{text}}}"
+
+This is a short answer question. {{{count}}} students responded.
+
+Below are the verbatim student responses:
+
+{{#responses}}
+- {{{.}}}
+{{/responses}}
+
+Write one concise, faculty-facing paragraph summarizing the key themes and patterns in these responses. Do not list or restate individual answers. Instead, identify common reasons, highlight any notable outliers, and explain what these patterns suggest about the students' experience.

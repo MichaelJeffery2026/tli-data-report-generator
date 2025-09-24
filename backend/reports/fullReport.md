@@ -8,7 +8,7 @@ Executive Summary
 
 ## Course Design Summary
 
-Course Design Summary
+{{{courseDesignSummary}}}
 
 ## Data Collection and Analysis Methods
 
