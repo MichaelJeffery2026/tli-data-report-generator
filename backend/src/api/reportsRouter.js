@@ -18,7 +18,7 @@ router.get("/raw/:surveyId/:sectionId", asyncHandler(async (req, res) => {
     }
 
     logger.info(`GET /reports/raw/${surveyId}/${sectionId} → raw report ready`);
-    res.status(200).download(rawReport, `raw-report-${surveyId}-${sectionId}.pdf`);
+    res.status(200).download(rawReport, `raw-report-${surveyId}-${sectionId}.docx`);
 }));
 
 router.get("/full/:surveyId/:sectionId", asyncHandler(async (req, res) => {

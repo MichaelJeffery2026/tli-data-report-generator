@@ -1,5 +1,6 @@
 import { fetchQuestions, startResponseExport, pollResponseExport, completeResponseExport } from "./qualtricsService.js";
 import { compileReport, renderTemplate } from "./pdfService.js";
+import { loadPrompt, fillPrompt, makeSection } from "./mustacheService.js";
 import { callTAMUAI } from "./tamuAIservice.js";
 import logger from "../utils/logger.js";
 
@@ -29,7 +30,24 @@ export async function getRawReport(surveyId, sectionId) {
 }
 
 export async function getFullReport(body) {
-    const response = await callTAMUAI([{ role: "user", content: "What is 2+2?" }]);
+    const initialPrompt = await loadPrompt("initialPrompt.txt");
+    const courseDesignSummary = await fillPrompt("courseDesignSummary.txt", {
+        course: "ACCT 602: Financial Reporting II",
+        learningActivities: "Assignments",
+        thirdParty: "RISE",
+        learningMaterials: "Textbook",
+        cohortActivities: "Projects"
+    });
+
+    // return {
+    //     initialPrompt,
+    //     courseDesignSummary
+    // }
+    const response = await callTAMUAI([
+        { role: "system", content: initialPrompt },
+        { role: "user", content: courseDesignSummary }
+    ]);
+    await makeSection(response.message, "courseDesignSummary");
     return response;
 }
 
