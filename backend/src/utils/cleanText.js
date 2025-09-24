@@ -11,6 +11,5 @@ export function cleanText(str) {
     .replace(/<[^>]+>/g, "") // strip HTML tags
     .replace(/([\\{}#$%&_^\~])/g, "\\$1")
     .replace(/\r?\n\r?\n/g, " \n\\par\n ")
-    // .replace(/,/g, "\\textcomma{} ")
     .replace(/\r?\n/g, " ");
 }
