@@ -8,6 +8,6 @@ Each recommendation should:
 
 Do not create sub-bullets or expand each recommendation into multiple ideas. Output should be a simple list of distinct recommendations, each on its own line.
 
-{{course design summary}}
+{{courseDesignSummary}}
 
 {{results}}

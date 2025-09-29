@@ -4,7 +4,7 @@
 
 ## Executive Summary
 
-Executive Summary
+{{executiveSummary}}
 
 ## Course Design Summary
 
@@ -12,102 +12,102 @@ Executive Summary
 
 ## Data Collection and Analysis Methods
 
-Data Collection and Analysis Methods
+{{{dataCollection}}}
 
 ### Use of Generative AI
 
-Generative AI Statement
+The report was created by the **Teaching and Learning Innovation Team** at Mays Business School using **ChatGPT** through tamu.chat.ai. As an initial step, we employed generative AI tools to identify potential trends, themes, and insights from the survey data. The Learning Design Team carefully reviewed, validated, and refined the AI-generated observations to ensure accuracy and relevance. The final report provides actionable insights for course improvements. 
 
 ## Results
 
 ### Student Work and Cohort Sessions
 
-Intro Paragraph
+Students were asked about various aspects of their engagement with the course, including the devices they used, the time spent studying, their attendance at cohort sessions, and their overall engagement and performance. Findings are as follows: 
 
 #### Device
 
-![Figure 1: Device](components/device.jpg "alt")
+![*Figure 1: Device*](components/device.jpg "alt")
 
-Device Paragraph
+{{device}}
 
 #### Hours
 
-![Figure 2: Hours](components/hours.jpg "alt")
+![*Figure 2: Hours*](components/hours.jpg "alt")
 
-Hours Paragraph
+{{hours}}
 
 #### Session Attendance
 
-![Figure 3: Session Attendance](components/attendance.jpg "alt")
+![*Figure 3: Session Attendance*](components/attendance.jpg "alt")
 
-Session Attendance Paragraph
+{{attendance}}
 
 #### Engaging
 
-![Figure 4: Engaging](components/engaging.jpg "alt")
+![*Figure 4: Engaging*](components/engaging.jpg "alt")
 
-Engaging Paragraph
+{{engaging}}
 
 #### Watched Recording
 
-![Figure 5: Watched Recording](components/recording.jpg "alt")
+![*Figure 5: Watched Recording*](components/recording.jpg "alt")
 
 #### Absence Reason
 
 Absence Reason Table
 
-Absence Reason Paragraph
+{{absence_reason}}
 
 #### Grade
 
-![Figure 6: Grade](components/grade.jpg "alt")
+![*Figure 6: Grade*](components/grade.jpg "alt")
 
-Grade Paragraph
+{{grade}}
 
 ### Learning Experience
 
 #### Likert
 
-Likert Summary
+Students reflected on their learning and expressed agreement or disagreement with statements related to their experience. Questions were rated on a Likert scale with 1 corresponding with “Strongly Disagree,” and 5 corresponding with “Strongly Agree.” 
+
+{{likert_table}}
+
+*Figure 7: Likert Statements*
 
 {{likert}}
 
-Figure 7: Likert Statements
-
-Likert Paragraphs
-
 ### Beneficial Course Components and Suggested Improvements
 
-Intro Paragraph
+Students were asked to identify the most beneficial components of the course and suggest improvements. Findings are as follows:  
 
 #### Component
 
-![Figure 8: Component](components/component.jpg "alt")
+![*Figure 8: Component*](components/component.jpg "alt")
 
-Component Paragraph
+{{component}}
 
 #### Rationale 1
 
 Rationale 1 Table
 
-Rationale 1 Paragraph
+{{rationale_1}}
 
 #### Improvements
 
-![Figure 9: Improvements](components/improvements.jpg "alt")
+![*Figure 9: Improvements*](components/improvements.jpg "alt")
 
-Improvements Paragraph
+{{improvements}}
 
 #### Rationale 2
 
 Rationale 2 Table
 
-Rationale 2 Paragraph
+{{rationale_2}}
 
 ## Recommended Actions for Faculty
 
-Recommended Actions
+{{recommendedActions}}
 
 ## Appendix
 
-Appendix
+Link raw report here
