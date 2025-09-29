@@ -54,8 +54,6 @@ Students were asked about various aspects of their engagement with the course, i
 
 #### Absence Reason
 
-Absence Reason Table
-
 {{absence_reason}}
 
 #### Grade
@@ -88,8 +86,6 @@ Students were asked to identify the most beneficial components of the course and
 
 #### Rationale 1
 
-Rationale 1 Table
-
 {{rationale_1}}
 
 #### Improvements
@@ -99,8 +95,6 @@ Rationale 1 Table
 {{improvements}}
 
 #### Rationale 2
-
-Rationale 2 Table
 
 {{rationale_2}}
 

@@ -56,10 +56,24 @@ export async function compileFullReport() {
     const referencePath = path.join(reportsDir, "reference.docx");
 
     const template = await fs.readFile(texPath, "utf8");
-    const likert = await fs.readFile(path.join(reportsDir, "components/likert-markdown.md"), "utf8");
 
     const rendered = Mustache.render(template, {
-      likert
+      courseDesignSummary: await fs.readFile(path.join(reportsDir, "components/courseDesignSummary.txt"), "utf8"),
+      dataCollection: await fs.readFile(path.join(reportsDir, "components/dataCollection.txt"), "utf8"),
+      device: await fs.readFile(path.join(reportsDir, "components/device.txt"), "utf8"),
+      hours: await fs.readFile(path.join(reportsDir, "components/hours.txt"), "utf8"),
+      attendance: await fs.readFile(path.join(reportsDir, "components/attendance.txt"), "utf8"),
+      engaging: await fs.readFile(path.join(reportsDir, "components/engaging.txt"), "utf8"),
+      absence_reason: await fs.readFile(path.join(reportsDir, "components/absence-reason.txt"), "utf8"),
+      grade: await fs.readFile(path.join(reportsDir, "components/grade.txt"), "utf8"),
+      likert: await fs.readFile(path.join(reportsDir, "components/likert.txt"), "utf8"),
+      likert_table: await fs.readFile(path.join(reportsDir, "components/likert-markdown.txt"), "utf8"),
+      component: await fs.readFile(path.join(reportsDir, "components/component.txt"), "utf8"),
+      rationale_1: await fs.readFile(path.join(reportsDir, "components/rationale-1.txt"), "utf8"),
+      improvements: await fs.readFile(path.join(reportsDir, "components/improvements.txt"), "utf8"),
+      rationale_2: await fs.readFile(path.join(reportsDir, "components/rationale-2.txt"), "utf8"),
+      recommendedActions: await fs.readFile(path.join(reportsDir, "components/recommendedActions.txt"), "utf8"),
+      executiveSummary: await fs.readFile(path.join(reportsDir, "components/executiveSummary.txt"), "utf8")
     });
 
     const expandedPath = path.join(reportsDir, "expandedReport.md");
@@ -136,7 +150,7 @@ export async function renderTemplate(question) {
   if (question.type === "Matrix") {
     templatePath = path.join(process.cwd(), `reports/templates/MatrixMarkdown.tex`);
     template = await fs.readFile(templatePath, "utf8");
-    outputPath = path.join(outputDir, `${file}-markdown.md`);
+    outputPath = path.join(outputDir, `${file}-markdown.txt`);
     rendered = Mustache.render(template, { responses });
     await fs.writeFile(outputPath, rendered, "utf8");
   }
