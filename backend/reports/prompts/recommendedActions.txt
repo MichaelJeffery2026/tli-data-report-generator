@@ -1,0 +1,13 @@
+Using the Course Design Summary and Results sections below, write no more than 4 actionable recommendations for the faculty member who will teach this course again. 
+
+Each recommendation should:
+- Be 1-2 sentences long,
+- Be specific about what action to take,
+- Explicitly connect to findings from the Results or Course Design,
+- Be written in a professional, faculty-facing tone.
+
+Do not create sub-bullets or expand each recommendation into multiple ideas. Output should be a simple list of distinct recommendations, each on its own line.
+
+{{courseDesignSummary}}
+
+{{results}}

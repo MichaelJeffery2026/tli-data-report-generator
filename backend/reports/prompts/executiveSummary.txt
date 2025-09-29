@@ -1,0 +1,16 @@
+Using the sections below, write a concise Executive Summary in 3-4 short paragraphs; each paragraph should be 3-5 sentences long.
+
+- The first paragraph should briefly summarize the Course Design (course structure, delivery method, and key instructional components). Keep it high-level without listing every assignment or tool.
+- The second paragraph should summarize Data Collection and the overall survey Results, highlighting major strengths and any notable areas for improvement. Do not repeat the Generative AI boilerplate.
+- The third paragraph should introduce the faculty recommendations and present them as a short, high-level bulleted list (just the main actions, not detailed explanations).
+- End with one closing sentence that reinforces the purpose: enhancing student learning and faculty effectiveness.
+
+Maintain a professional, faculty-facing tone consistent with the rest of the report.
+
+{{courseDesignSummary}}
+
+{{dataCollection}}
+
+{{results}}
+
+{{recommendedActions}}

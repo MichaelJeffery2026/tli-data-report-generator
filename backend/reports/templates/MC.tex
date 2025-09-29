@@ -1,9 +1,72 @@
-\subsection{ {{{name}}} }
-\tagstructbegin{tag=Figure}
-\begin{figure}[H]
-    \barchart
-        { {{#options}}{{{.}}}{{/options}} }
-        { {{#counts}}{{.}}{{/counts}} }
-        { {{totalResponses}} }
-\end{figure}
-\tagstructend
+\documentclass[tikz,border=5pt]{standalone}
+\usepackage{pgfplots}
+\pgfplotsset{compat=1.18}
+
+\usepackage{xcolor} % <-- for defining and using colors
+\definecolor{maroon}{HTML}{500000} % <-- define maroon
+
+\newcommand{\textcomma}{,}
+
+% Count items helper
+\newcommand{\countitems}[1]{%
+  \pgfmathsetmacro{\nitems}{0}%
+  \foreach \x in {#1}{%
+    \pgfmathparse{\nitems+1}%
+    \global\let\nitems=\pgfmathresult%
+  }%
+  \pgfmathtruncatemacro{\nitems}{\nitems}%
+}
+
+% Bar chart macro
+\newcommand{\barchart}[3]{%
+  \countitems{#1}%
+  \centering
+  \begin{tikzpicture}
+    \begin{axis}[
+      scale only axis,
+      width=\linewidth,
+      height=0.15*\linewidth,
+      ybar,
+      bar width=12pt,
+      tick style={draw=none},
+      xmin=-0.5, xmax=\nitems-0.5,
+      ymin=0,
+      axis x line=bottom,
+      axis line style={-},
+      axis y line=none,
+      xtick={0,...,\nitems-1},
+      xticklabels={#1},
+      xtick=data,
+      xtick align=center,
+      x tick label style={
+        text width=\dimexpr\textwidth/(\nitems+1)\relax,
+        align=center,
+        font=\small
+      },
+      nodes near coords,
+      every node near coord/.append style={
+        font=\small,
+        anchor=south,
+        yshift=2pt
+      },
+      nodes near coords align=vertical,
+    ]
+      \def\coords{}%
+      \foreach [count=\i from 0] \v in {#2}{%
+        \xdef\coords{\coords (\i,\v)}%
+      }%
+      \addplot[fill=maroon] coordinates {\coords};
+    \end{axis}
+    \node[anchor=north east, font=\small, yshift=25pt] 
+      at (current bounding box.north east) {#3 Responses};
+  \end{tikzpicture}
+}
+
+\begin{document}
+
+\barchart
+    { {{#options}}{{{.}}}{{/options}} }
+    { {{#counts}}{{.}}{{/counts}} }
+    { {{totalResponses}} }
+
+\end{document}

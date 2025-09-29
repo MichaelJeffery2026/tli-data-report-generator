@@ -1,5 +1,6 @@
 import express, { raw } from "express";
 import { getRawReport } from "../services/reportService.js"
+import { getFullReport } from "../services/reportService.js";
 import logger from "../utils/logger.js";
 import AppError from "../errors/appError.js";
 
@@ -18,6 +19,19 @@ router.get("/raw/:surveyId/:sectionId", asyncHandler(async (req, res) => {
 
     logger.info(`GET /reports/raw/${surveyId}/${sectionId} → raw report ready`);
     res.status(200).download(rawReport, `raw-report-${surveyId}-${sectionId}.pdf`);
+}));
+
+router.get("/full/:surveyId/:sectionId", asyncHandler(async (req, res) => {
+    const { surveyId, sectionId } = req.params;
+    const fullReport = await getFullReport(surveyId, sectionId);
+
+    if (!fullReport) {
+        logger.warn(`GET /reports/full/${surveyId}/${sectionId} → no full report found`);
+        throw new AppError("No full report found", 404);
+    }
+
+    logger.info(`GET /reports/full/${surveyId}/${sectionId} → full report ready`);
+    res.status(200).download(fullReport, `full-report-${surveyId}-${sectionId}.docx`);
 }));
 
 export default router;

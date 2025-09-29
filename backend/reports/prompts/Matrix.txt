@@ -1,0 +1,16 @@
+The text of this question is: "{{{text}}}"
+
+This is a Likert-scale question with {{{count}}} student responses. Students rated sixteen statements on a scale from 1 (“Strongly Disagree”) to 5 (“Strongly Agree”). Below are the average scores and standard deviations for each item:
+
+{{#responses}}
+- "{{{option}}}" — Average: {{{mean}}}, Standard Deviation: {{{stdev}}}
+{{/responses}}
+
+Write 4-6 paragraphs total, grouped by category, rather than treating each item individually:
+1. High-consensus strengths (high mean, low standard deviation).
+2. High-consensus weaknesses (low mean, low standard deviation).
+3. Mixed areas (average mean, wider standard deviation).
+4. Outliers (statements with unusually high variability).
+5. Synthesis and conclusions that integrate the findings into a broader interpretation of the student experience.
+
+Do not restate every number. Instead, group statements into these categories, highlight patterns, and explain implications for course design and student engagement.

@@ -16,72 +16,14 @@
 \definecolor{gray200}{HTML}{eaeaea} 
 
 \usepackage{tabularx}
+\usepackage{xltabular}
 
 \usepackage{float}
 
 \usepackage{longtable}
-\usepackage{xltabular} % works with LuaLaTeX and pdfLaTeX
 
 \usepackage{array}
 \renewcommand{\arraystretch}{1.5}
-
-\usepackage{pgfplots}
-\pgfplotsset{compat=1.18}
-
-% Count items helper
-\newcommand{\countitems}[1]{%
-  \pgfmathsetmacro{\nitems}{0}%
-  \foreach \x in {#1}{%
-    \pgfmathparse{\nitems+1}%
-    \global\let\nitems=\pgfmathresult%
-  }%
-  \pgfmathtruncatemacro{\nitems}{\nitems}%
-}
-
-% Bar chart macro
-\newcommand{\barchart}[3]{%
-  \countitems{#1}%
-  \centering
-  \begin{tikzpicture}
-    \begin{axis}[
-      scale only axis,
-      width=\linewidth,
-      height=0.15*\linewidth,
-      ybar,
-      bar width=12pt,
-      tick style={draw=none},
-      xmin=-0.5, xmax=\nitems-0.5,
-      ymin=0,
-      axis x line=bottom,
-      axis line style={-},
-      axis y line=none,
-      xtick={0,...,\nitems-1},
-      xticklabels={#1},
-      xtick=data,
-      xtick align=center,
-      x tick label style={
-        text width=\dimexpr\textwidth/(\nitems+1)\relax,
-        align=center,
-        font=\small
-      },
-      nodes near coords,
-      every node near coord/.append style={
-        font=\small,
-        anchor=south,
-        yshift=2pt
-      },
-      nodes near coords align=vertical,
-    ]
-      \def\coords{}%
-      \foreach [count=\i from 0] \v in {#2}{%
-        \xdef\coords{\coords (\i,\v)}%
-      }%
-      \addplot[fill=maroon] coordinates {\coords};
-    \end{axis}
-    \node[anchor=north east, font=\small, yshift=25pt] 
-      at (current bounding box.north east) {#3 Responses};
-  \end{tikzpicture}
-}
 
 \usepackage{hyperref}
 \tagpdfsetup{
@@ -92,33 +34,47 @@
   pdftitle={Raw Data Report}
 }
 
+\usepackage{graphicx}
+
 \usepackage{titlesec}
 \titleformat{\subsection}[block]{\fontsize{14pt}{16pt}\bfseries\color{maroon}}{}{0pt}{} % Header 2
 
 \begin{document}
 
-\input{components/device.tex}
+\subsection{Device - What device do you use to access your Flex Online course?}
+\includegraphics[width=\linewidth]{components/device.jpg}
 
-\input{components/hours.tex}
+\subsection{Hours - How many hours per week (on average) did you spend studying and/or preparing for this course?}
+\includegraphics[width=\linewidth]{components/hours.jpg}
 
-\input{components/attendance.tex}
+\subsection{Session Attendance - How many Cohort Sessions did you attend?}
+\includegraphics[width=\linewidth]{components/attendance.jpg}
 
-\input{components/engaging.tex}
+\subsection{Engaging - Did you find the cohort sessions engaging?}
+\includegraphics[width=\linewidth]{components/engaging.jpg}
 
-\input{components/recording.tex}
+\subsection{Watched Recording - If you were unable to attend a Cohort Session, did you watch the session recording?}
+\includegraphics[width=\linewidth]{components/recording.jpg}
 
+\subsection{Absence Reason - If you missed a cohort session, please share the reason(s) why:}
 \input{components/absence-reason.tex}
 
-\input{components/grade.tex}
+\subsection{Grade - I anticipate earning a grade of:}
+\includegraphics[width=\linewidth]{components/grade.jpg}
 
+\subsection{Likert - Rate your association with these questions from Strongly Disagree (1) to Strongly Agree (5).}
 \input{components/likert.tex}
 
-\input{components/component.tex}
+\subsection{Component - What components of the course do you find most beneficial? (Select all that apply)}
+\includegraphics[width=\linewidth]{components/component.jpg}
 
+\subsection{Rationale 1 - Please explain your reason(s) for selecting the components in the previous question.}
 \input{components/rationale-1.tex}
 
-\input{components/improvements.tex}
+\subsection{Improvements - Please explain how the course component(s) from the previous question could be improved to increase your learning.}
+\includegraphics[width=\linewidth]{components/improvements.jpg}
 
+\subsection{Rationale 2 - Please explain how the course component(s) from the previous question could be improved to increase your learning.}
 \input{components/rationale-2.tex}
 
 \end{document}

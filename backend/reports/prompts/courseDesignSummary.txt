@@ -1,0 +1,5 @@
+Write the Course Design Summary in two paragraphs for {{{course}}}.
+
+Paragraph 1: Explain that this is an accelerated eight-week graduate-level course administered through the Canvas Learning Management System. Describe its structure as eight weekly modules designed to provide a clear roadmap and scaffold learning. Mention that students participated in seven synchronous Zoom cohort sessions, which supported both student-to-student and student-professor interaction.
+
+Paragraph 2: Describe the course learning activities ({{{learningActivities}}}), the third-party tools employed ({{{thirdParty}}}), and the course learning materials ({{{learningMaterials}}}). Conclude by noting that cohort sessions also included graded activities ({{{cohortActivities}}}). Write in a professional, faculty-facing tone suitable for a departmental report.
