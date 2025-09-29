@@ -1,9 +1,9 @@
 import { fetchQuestions, startResponseExport, pollResponseExport, completeResponseExport } from "./qualtricsService.js";
-import { compileReport, renderTemplate } from "./pdfService.js";
-import { loadPrompt, fillPrompt, makeSection } from "./mustacheService.js";
+import { setCache, getCache } from "../utils/cache.js";
+import { compileFullReport, compileReport, renderTemplate } from "./pdfService.js";
+import { fillPrompt, makeSection } from "./promptService.js";
 import { callTAMUAI } from "./tamuAIservice.js";
 import logger from "../utils/logger.js";
-
 
 export async function getRawReport(surveyId, sectionId) {
     try {
@@ -17,6 +17,7 @@ export async function getRawReport(surveyId, sectionId) {
 
         // 3. Combine question and response data
         const rawData = await formatRawReportData(shapedQuestions, shapedResponses, surveyId, sectionId);
+        setCache(rawData);
 
         for (const response of rawData.data) {
             await renderTemplate(response);
@@ -29,26 +30,96 @@ export async function getRawReport(surveyId, sectionId) {
     }
 }
 
-export async function getFullReport(body) {
-    const initialPrompt = await loadPrompt("initialPrompt.txt");
-    const courseDesignSummary = await fillPrompt("courseDesignSummary.txt", {
+const nameMap = {
+  "QID5": "hours",
+  "QID6": "attendance",
+  "QID7": "absence-reason",
+  "QID8": "engaging",
+  "QID9": "grade",
+  "QID10": "likert",
+  "QID11": "component",
+  "QID12": "rationale-1",
+  "QID14": "improvements",
+  "QID15": "rationale-2",
+  "QID16": "device",
+  "QID17": "recording"
+}
+
+export async function getFullReport(surveyId, sectionId) {
+    const context = [];
+
+    const initialPrompt = await fillPrompt("initialPrompt.txt");
+    context.push({ role: "system", content: initialPrompt });
+    
+    let courseDesignSummary = await fillPrompt("courseDesignSummary.txt", {
         course: "ACCT 602: Financial Reporting II",
         learningActivities: "Assignments",
         thirdParty: "RISE",
         learningMaterials: "Textbook",
         cohortActivities: "Projects"
     });
-
-    // return {
-    //     initialPrompt,
-    //     courseDesignSummary
-    // }
-    const response = await callTAMUAI([
-        { role: "system", content: initialPrompt },
-        { role: "user", content: courseDesignSummary }
-    ]);
+    context.push({ role: "user", content: courseDesignSummary });
+    let response = await callTAMUAI(context);
+    context.push({ role: "assistant", content: response.message });
     await makeSection(response.message, "courseDesignSummary");
-    return response;
+    courseDesignSummary = response.message;
+
+    let dataCollection = await fillPrompt("dataCollection.txt", {
+        course: "ACCT 602: Financial Reporting II",
+        responses: 27
+    });
+    context.push({ role: "user", content: dataCollection });
+    response = await callTAMUAI(context);
+    context.push({ role: "assistant", content: response.message });
+    await makeSection(response.message, "dataCollection");
+    dataCollection = response.message;
+
+    const initialResults = await fillPrompt("initialResults.txt");
+    context.push({ role: "system", content: initialResults });
+
+    // let results = [];
+    // const rawData = getCache();
+    // for (const question of rawData.data) {
+    //     if (["QID1", "QID2", "QID3", "QID4"].includes(question.id)) {
+    //         logger.warn(`Not found: ${question.id}`)
+    //         continue;
+    //     }
+    //     console.log(question.id);
+    //     const prompt = await fillPrompt(`${question.type}.txt`, {
+    //         text: question.text,
+    //         count: question.responseCount,
+    //         responses: question.responses
+    //     })
+    //     context.push({ role: "user", content: prompt });
+    //     response = await callTAMUAI(context);
+    //     context.push({ role: "assistant", content: response.message });
+    //     await makeSection(response.message, nameMap[question.id]);
+    //     results.push(response.message);
+    // }
+
+    // let recommendedActions = await fillPrompt("recommendedActions.txt", {
+    //     courseDesignSummary,
+    //     results
+    // })
+    // context.push({ role: "user", content: recommendedActions });
+    // response = await callTAMUAI(context);
+    // context.push({ role: "assistant", content: response.message });
+    // await makeSection(response.message, "recommendedActions");
+    // recommendedActions = response.message;
+
+    // const executiveSummary = await fillPrompt("executiveSummary.txt", {
+    //     courseDesignSummary,
+    //     dataCollection,
+    //     results,
+    //     recommendedActions
+    // })
+    // context.push({ role: "user", content: executiveSummary });
+    // response = await callTAMUAI(context);
+    // context.push({ role: "assistant", content: response.message });
+    // await makeSection(response.message, "executiveSummary");
+    
+    const fullReport = compileFullReport(surveyId, sectionId);
+    return fullReport;
 }
 
 async function shapeQuestions(questionData, surveyId, sectionId) {
